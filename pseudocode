@@ -1,0 +1,51 @@
+if game start command received:
+    add user who gave command to Players
+	wait 30 seconds:
+        if start now command received:
+            start game immediately
+       if player joins:
+           add player to Players
+
+set all scores for Players to 0
+
+Main loop:
+    if all Players have been WordPicker:
+        break
+        end game
+    
+    Hanged counter == 0
+    shuffle Players
+    WordPicker set to first user in Players list who has not been WordPicker yet
+    ask WordPicker to input word (do not display word, word must be > 1 letter)
+    Display Hanged image[counter]
+    Display blanks for each letter in word
+	
+	Play loop:
+		Next person in Players list who is not WordPicker becomes Guesser
+		Current Guesser asked for Guess
+			if Guess has 1 letter:
+				while letter in UsedLetters or letter > 1 in length: (Forces player to select letter... change to allow word guess?)
+					ask for different letter
+				else:
+                    if in Word: 
+                        reveal letter(s) (one letter can occur multiple times in the same word, so reveal all occurences)
+					    add letter to UsedLetters list
+                    else:
+						add letter to UsedLetters list
+						Hanged counter++
+			else: (guess is always a word if > 1 letter)
+				if Guess == Word:
+					Guesser win
+                    Guesser score ++
+				else:
+					Hanged counter++ (more? auto-death?)
+			if Hanged counter >= Death:
+				Display final Hanged image
+				Display Round Over
+                Reveal word
+                WordPicker win
+				WordPicker score ++ (more?)
+				break to Main loop
+
+display final score for all players
+end
